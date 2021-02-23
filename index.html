@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visual Analytics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
+
+          <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <style>
+
+        #caption {
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-family: serif;
+            font-size: 20pt;
+        }
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="caption">
+    Visual Presentation
+</div>
+
+
+
+
+
+<div class="container">
+
+    <form method="post" id="framework_form">
+        <div class="form-group">
+            <label>Select files</label>
+            <select id="framework" name="framework[]" multiple class="form-control" style="width: 40%">
+            </select>
+            <input type="submit" class="btn btn-info" name="submit" value="Submit"/>
+        </div>
+        
+        
+    </form>
+    <div class="row">
+        <div class="col-sm-6">
+            <svg id="svg_2019">
+            </svg>
+        </div>
+        <div class="col-sm-6">
+            <svg id="svg_2020">
+            </svg>
+        </div>
+        <div class="col-sm-6">
+            <svg id="file3">
+            </svg>
+        </div>
+        <div class="col-sm-6">
+            <svg id="file4">
+            </svg>
+        </div>
+        <div class="col-sm-6">
+            <svg id="file5">
+            </svg>
+        </div>
+    </div>
+</div>
+<script>
+
+   
+
+    var title =  "2019 Trade amount";
+    var selected_countries = ['NSA01', 'NSA02', 'NSA03', 'NSA04', 'NSA05'];
+    
+
+    d3.csv("/dataset/df.csv", function (data) {
+        let str = ''
+        str += '<option value='+data.filename;
+        if (selected_countries.includes(data.filename)) {
+            str += '  '
+        }
+        str += '>' + data.filename + '</option>'
+
+        document.getElementById("framework").innerHTML += str;
+    });
+
+    $(document).ready(function () {
+        $('.form-control').select2({
+            maximumSelectionLength: 5
+        });
+
+        $('#framework_form').on('submit', function (event) {
+            event.preventDefault();
+            window.selected_countries = [];
+            $('#framework option:selected').each(function () {
+                window.selected_countries.push($(this)[0].value)
+            });
+            main()
+        });
+
+
+    });
+
+    
+
+    let margin = 40;
+    let width = 1000 - 2 * margin;
+    let height = 700 - 2 * margin;
+
+    
+    
+    // let parseDate = d3.timeParse("%y-%b");
+
+    
+</script>
+</body>
+</html>
