@@ -5,17 +5,23 @@
 			select { position: absolute; left: 50px; top: 50px; }
 			p { position: absolute; left: 280px; top: 32px; }
 		</style>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script>
+		$( function() {
+		  $( "#draggable" ).draggable();
+		} );
+		</script>
 	</head>
 	<body>
 		<script type="text/javascript">
 
-// specify a format function we'll use later
-// https://github.com/mbostock/d3/wiki/Formatting
+
 var comma = d3.format(",");
 
 d3.csv("/dataset/df.csv", function(data) {
 
-	// create the drop down menu of cities
+	// create the drop down menu of files
 	var selector = d3.select("body")
 		.append("select")
 		.attr("id", "cityselector")
@@ -27,12 +33,12 @@ d3.csv("/dataset/df.csv", function(data) {
 			return i;
 		});
 
-	// generate a random index value and set the selector to the city
+	// generate a random index value and set the selector to the files
 	// at that index value in the data array
 	var index = Math.round(Math.random() * data.length);
 	d3.select("#cityselector").property("selectedIndex", index);
 
-	// append a paragraph tag to the body that shows the city name and it's population
+	// append a paragraph tag to the body that shows the file name and it's data
 	d3.select("body")
 				.append("p")
 				.data(data)
@@ -40,7 +46,7 @@ d3.csv("/dataset/df.csv", function(data) {
 					return data[index]['filename'] + " -  " + data[index]['DATA']; 
 				})
 
-	// when the user selects a city, set the value of the index variable
+	// when the user selects a file, set the value of the index variable
 	// and call the update(); function
 	d3.select("#cityselector")
 	.on("change", function(d) {
