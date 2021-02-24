@@ -87,88 +87,22 @@
 
 
 
-<div class="container">
 
-    <form method="post" id="framework_form">
-        <div class="form-group">
-            <label>Select files</label>
-            <select id="framework" name="framework[]" multiple class="form-control" style="width: 40%">
-            </select>
-            <input type="submit" class="btn btn-info" name="submit" value="Submit"/>
-        </div>
         
         
-    </form>
-    <div class="row">
-        <div class="col-sm-6">
-            <svg id="svg_2019">
-            </svg>
-        </div>
-        <div class="col-sm-6">
-            <svg id="svg_2020">
-            </svg>
-        </div>
-        <div class="col-sm-6">
-            <svg id="file3">
-            </svg>
-        </div>
-        <div class="col-sm-6">
-            <svg id="file4">
-            </svg>
-        </div>
-        <div class="col-sm-6">
-            <svg id="file5">
-            </svg>
-        </div>
-    </div>
-</div>
+    
 <script>
 
    
 
-    var title =  "2019 Trade amount";
-    var selected_countries = ['NSA01', 'NSA02', 'NSA03', 'NSA04', 'NSA05'];
-    
+d3.json("/dataset/df.json", function(error, data) {
 
-    d3.csv("/dataset/df.csv", function (data) {
-        let str = ''
-        str += '<option value='+data.filename;
-        if (selected_countries.includes(data.filename)) {
-            str += '  '
-        }
-        str += '>' + data.filename + '</option>'
-
-        document.getElementById("framework").innerHTML += str;
-    });
-
-    $(document).ready(function () {
-        $('.form-control').select2({
-            maximumSelectionLength: 5
-        });
-
-        $('#framework_form').on('submit', function (event) {
-            event.preventDefault();
-            window.selected_countries = [];
-            $('#framework option:selected').each(function () {
-                window.selected_countries.push($(this)[0].value)
-            });
-            main()
-        });
-
-
-    });
-
-    
-
-    let margin = 40;
-    let width = 1000 - 2 * margin;
-    let height = 700 - 2 * margin;
-
-    
-    
-    // let parseDate = d3.timeParse("%y-%b");
-
-    
+data.forEach(function(d) {
+    d.filename = d.filename;
+    d.DATA = +d.DATA;
+    console.log(data)
+});
+})
 </script>
 </body>
 </html>
