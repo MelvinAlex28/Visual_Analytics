@@ -1,77 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>2 Divs Side-By-Side</title>
-    <script src="https://d3js.org/d3.v2.js"></script>
-    <style>
-        #divP {
-  width: 100%;
-  height: 100%;
-  }
-        #div1 {
-  background-color: grey;
-  }
- 
-#div2 {
-  background-color: orange;
-  }
- 
-#div1, #div2 {
-    font-family: Tahoma, Geneva, Helvetica, sans-serif;
-  font-size: 18px;
-  text-align: center;
-  padding: 20px;
-  width: 360px;
-  float: left;
-  }
-    </style>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
-  <link rel="stylesheet" href="css/screen.css">
-  </head>
-  <body>
-    
-    <p>This exercise will place two div elements side by side.</p>
-    <div id="divP">
-      <div id="div1">
-       
-      </div><!-- div1 end -->
-      <div id="div2">
-        >
-      </div><!-- div2 end -->
-    </div><!-- divP end -->
-
-    <script type="text/javascript">
-
-
+<html>
+	<head>
+		<script src="https://d3js.org/d3.v2.js"></script>
+		<style>
+			select { position: absolute; left: 50px; top: 50px; }
+			div { position: absolute; left: 280px; top: 32px; }
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+		
+		
+// specify a format function we'll use later
+// https://github.com/mbostock/d3/wiki/Formatting
 var comma = d3.format(",");
 
 d3.csv("/dataset/df.csv", function(data) {
 
-    // create the drop down menu of files
-    var selector = d3.select("divp")
-        .append("div1")
-        .attr("id", "cityselector")
-        .selectAll("option")
-        .data(data)
-        .enter().append("option")
-        .text(function(d) { return d.filename; })
-        .attr("value", function (d, i) {
-            return i;
-        });
-    var index = Math.round(Math.random() * data.length);
+	// create the drop down menu of cities
+	var selector = d3.select("body")
+		.append("select")
+		.attr("id", "cityselector")
+		.selectAll("option")
+		.data(data)
+		.enter().append("option")
+		.text(function(d) { return d.filename; })
+		.attr("value", function (d, i) {
+			return i;
+		});
+
+	// generate a random index value and set the selector to the city
+	// at that index value in the data array
+	var index = Math.round(Math.random() * data.length);
 	d3.select("#cityselector").property("selectedIndex", index);
-    
-    d3.select("divp")
-				.append("div2")
+
+	// append a paragraph tag to the body that shows the city name and it's population
+	d3.select("body")
+				.append("div")
 				.data(data)
 				.text(function(d){ 
 					return data[index]['filename'] + " -  " + data[index]['DATA']; 
 				})
 
+
+	// when the user selects a city, set the value of the index variable
+	// and call the update(); function
+	d3.select("#cityselector")
+	.on("change", function(d) {
+		index = this.value;
+		update(100);
+	})
+
+	// update the paragraph text to match the selection made by the user
+	function update(i){
+		var input = document.createElement("input");
+		input.type="text"
+		var id = data[index]['filename']
+		
+		selP=d3.select("div")
+		
+		selP.append("div")
+		.append("text")
+		.attr("id",id)
+		.attr("type","text")
+		.text(function(d){ 
+				return data[index]['filename'] + " -  " + data[index]['DATA']; 
+			})
+		.append('tspan')
+		.attr('dx',0)
+		.attr('dy',i+100)
+
+	}
+
 })
-</script>
-  </body>
+		</script>
+	</body>
 </html>

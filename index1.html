@@ -1,14 +1,27 @@
 <html>
 	<head>
-		<script src="https://d3js.org/d3.v2.js"></script>
+		<!-- <script src="https://d3js.org/d3.v2.js"></script> -->
+		<script src="//d3js.org/d3.v4.min.js"></script>
 		<style>
 			select { position: absolute; left: 50px; top: 50px; }
 			p { position: absolute; left: 280px; top: 32px; }
+			div {border-color: black;border-width:2px;
+border-style:solid;}
 		</style>
 	</head>
 	<body>
+		
 		<script type="text/javascript">
-
+		var margin = {top: 10, right: 10, bottom: 30, left: 10},
+    	width = 960 - margin.left - margin.right,
+    	height = 500 - margin.top - margin.bottom;
+		
+	var rectangles = d3.range(10).map(function() {
+  return {
+    x: Math.round(Math.random() * (width)),
+    y: Math.round(Math.random() * (height))
+  };
+});
 // specify a format function we'll use later
 // https://github.com/mbostock/d3/wiki/Formatting
 var comma = d3.format(",");
@@ -27,44 +40,77 @@ d3.csv("/dataset/df.csv", function(data) {
 			return i;
 		});
 
-	// generate a random index value and set the selector to the city
+	// generate a random index value and set the selector to the file
 	// at that index value in the data array
 	var index = Math.round(Math.random() * data.length);
 	d3.select("#cityselector").property("selectedIndex", index);
 
-	// append a paragraph tag to the body that shows the city name and it's population
+	// append a paragraph tag to the body that shows the file name and it's data
 	d3.select("body")
 				.append("p")
-				.data(data)
+			/*	.data(data)
+
 				.text(function(d){ 
 					return data[index]['filename'] + " -  " + data[index]['DATA']; 
 				})
 
-
-	// when the user selects a city, set the value of the index variable
+*/
+	// when the user selects a file, set the value of the index variable
 	// and call the update(); function
 	d3.select("#cityselector")
 	.on("change", function(d) {
 		index = this.value;
-		update(100);
+		update(data);
 	})
 
 	// update the paragraph text to match the selection made by the user
-	function update(i){
+	function update(data){
 		var input = document.createElement("input");
 		input.type="text"
 		var id = data[index]['filename']
+		
 		selP=d3.select("p")
-		selP.append("div")
+		
+		
+		selP
+		.data(rectangles)
+		.enter()
+		.append("div")
 		.append("text")
 		.attr("id",id)
 		.attr("type","text")
 		.text(function(d){ 
+			//console.log(data[index]['filename'])
 				return data[index]['filename'] + " -  " + data[index]['DATA']; 
 			})
-		.append('tspan')
-		.attr('dx',0)
-		.attr('dy',i+100)
+		selP
+		
+		.attr("x", function(d) { return d.x; })
+     	.attr("y", function(d) { return d.y; })
+
+		selP.call(d3.drag()
+    		.on("start", dragstarted)
+    		.on("drag", dragged)
+    		.on("end", dragended))
+
+	function dragstarted(d) {
+		console.log("started")
+  d3.select(this).raise().classed("active", true);
+}
+
+function dragged(d) {
+  d3.select(this).select("text")
+    .attr("x", d.x = d3.event.x)
+    .attr("y", d.y = d3.event.y);
+  d3.select(this).select("rect")
+    .attr("x", d.x = d3.event.x)
+    .attr("y", d.y = d3.event.y);
+}
+
+function dragended(d) {
+	console.log("ended")
+  d3.select(this).classed("active", false);
+}
 
 	}
 
