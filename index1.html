@@ -1,5 +1,10 @@
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>Visual Analytics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
      <script src="https://d3js.org/d3.v2.js"></script>
 <!--	<script src="https://d3js.org/d3.v4.min.js"></script>-->
 <!--	<script src="https://d3js.org/d3.v3.min.js"></script>-->
@@ -7,27 +12,47 @@
 <!--	<script src="https://d3js.org/d3.v6.min.js"></script>-->
 	<script src="JS files/plot.js"></script>
     <style>
+        #caption {
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-style: italic;
+            font-family: Apple Chancery;
+            color:coral;
+            font-size: 20pt;
+        }
         select {
             position: absolute;
+            border-style: outset;
+            border-width: 7px;
+            color: coral;
+            border-color: coral;  
             left: 50px;
-            top: 50px;
+            top: 90px;
         }
 
         p {
             position: absolute;
+            font-style: italic;
+            color: coral;
+            font-family: Apple Chancery;
             left: 280px;
-            top: 32px;
+            top: 90px;
         }
 
         div {
-            border-color: black;
-            border-width: 2px;
-            border-style: solid;
+            border-style: outset;
+            border-width: 7px;
+            border-color: coral;  
         }
     </style>
 
 </head>
 <body>
+    <div id="caption">
+        Visual Analytics Presentation
+    </div>
 
 <script type="text/javascript">
     var margin = {top: 10, right: 10, bottom: 30, left: 10},

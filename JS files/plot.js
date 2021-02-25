@@ -1,5 +1,5 @@
 function fileFun(data) {
-// create the drop down menu of cities
+// create the drop down menu of filename
     var selector = d3.select("body")
         .append("select")
         .attr("id", "cityselector")
