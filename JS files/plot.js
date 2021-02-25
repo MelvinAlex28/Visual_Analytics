@@ -47,8 +47,8 @@ function fileFun(data) {
         selP.append("div")
             .attr("id", id)
             .style("position", "absolute")
-            .style("height", "60px")
-            .style("width", "140px")
+            .style("height", "auto")
+            .style("width", "900px")
             .append("text")
             .attr("type", "text")
             .text(function (d) {
