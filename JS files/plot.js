@@ -73,8 +73,8 @@ function fileFun(data) {
     function dragged(d) {
         //console.log((parseFloat(event.pageX)*0.1))
         d3.select("div")
-            .style("left", (parseFloat(event.pageX)-280) + "px")
-            .style("top", (parseFloat(event.pageY)-50) + "px");
+            .style("left", (parseFloat(event.pageX)-270) + "px")
+            .style("top", (parseFloat(event.pageY)-80) + "px");
     }
 
     function dragended(d) {
