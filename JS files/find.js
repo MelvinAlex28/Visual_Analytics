@@ -1,14 +1,13 @@
 d3.json("/dataset/data.json").then(function (data){
     var ul = d3.select('ul').classed('list',true).append('li').classed('list',true);
-
+    //https://stackoverflow.com/questions/4187032/get-list-of-data-attributes-using-javascript-jquery
     ul.selectAll('li')
         .data(Object.keys(data))
         .enter()
         .append('li')
-        .append('draggable',true)
         .append('p')
         .attr('id',function(d){
-            //xconsole.log(d);
+            //console.log(d);
             return d;
         })
 
@@ -17,13 +16,13 @@ d3.json("/dataset/data.json").then(function (data){
         })
     
     .on('click',function(d){
-        text = d3.select('#workarea').append('div').classed('doclist', true);
+        text = d3.select('#workarea').append('div')
         console.log(text)
 
 
         text.append('div').classed('text', true).append('p')
         .html(function () {
-            return [d , data[d]];
+            return [data[d]];
             console.log(data[d])
         })
     });

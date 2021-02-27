@@ -2,7 +2,7 @@ function fileFun(data) {
 // create the drop down menu of filename
     var selector = d3.select("body")
         .append("select")
-        .attr("id", "cityselector")
+        .attr("id", "fileselector")
         .selectAll("option")
         .data(data)
         .enter().append("option")
@@ -16,7 +16,7 @@ function fileFun(data) {
     // generate a random index value and set the selector to the file
     // at that index value in the data array
     var index = Math.round(Math.random() * data.length);
-    d3.select("#cityselector").property("selectedIndex", index);
+    d3.select("#fileselector").property("selectedIndex", index);
 
     // append a paragraph tag to the body that shows the file name and it's data
     d3.select("body")
@@ -30,7 +30,7 @@ function fileFun(data) {
 */
     // when the user selects a file, set the value of the index variable
     // and call the update(); function
-    d3.select("#cityselector")
+    d3.select("#fileselector")
         .on("change", function (d) {
             //console.log(d)
             index = this.value;
