@@ -22,12 +22,13 @@ d3.json("/dataset/data.json").then(function (data){
 
         text.append('div').classed('text', true).append('p')
         .html(function () {
-            return [data[d]];
-            console.log(data[d])
+            return [d , data[d]];
         })
     });
             
-
+    $(function(){
+        $('#workspace').sortable();
+    })
 
         
 })/*
