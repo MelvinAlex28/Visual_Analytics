@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visual Analytics</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src='d3.js'></script>
+    <link rel="stylesheet" href="draganddrop.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="index-1.js"></script>
+    <script src="draganddrop.js"></script>
+
+    <style>
+        #caption {
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-style: bold;
+            font-family: Apple Chancery;
+            color: rgb(150, 58, 25);
+            font-size: 20pt;
+}
+        .col-4{
+            border-style: outset;
+            border-width: 7px;
+            color: coral;
+            border-color: coral;  
+        }
+
+        .col-8 {
+            border-style: outset;
+            border-width: 7px;
+            color: coral;
+            border-color: coral;  
+        }
+
+    </style>
+
+
+
+
+
+</head>
+<body>
+<div id="caption">
+    Visual Analytics Presentation
+    
+</div>
+<div class="row">
+    <div class="col-4">
+
+
+
+            <h3>File Name</h3>
+            <ul id="sortable" >
+
+                </ul>
+
+
+    </div>
+    <div class="col-8" id="display">
+        <h3>Display</h3>
+
+    </div>
+
+</div>
+
+
+</div>
+<script>
+    d3.json("data.json").then(function (data){
+    var selection = d3.select('ul').append('li').classed('list',true);
+    //https://stackoverflow.com/questions/4187032/get-list-of-data-attributes-using-javascript-jquery
+    
+    selection.selectAll('li')
+        .data(Object.keys(data))
+        .enter()
+        .append('li')
+        .append('p')
+        .attr('id',function(d){
+            return d;
+        })
+
+        .html(function (d){
+            return d;
+        })
+        .on('click',function(d){
+        //console.log(d)
+                text = d3.select('#display')
+                text.append('div')
+                    .attr('id',function(){
+                        return d+'text';
+        })
+                    .classed('text', true)
+                    .append('p')
+                    .html(function () {
+                        return [d , data[d]];
+                    });
+                
+    });
+
+    div = d3.select('#display')
+    div.on("mousemove", function() {
+    var mouse = d3.mouse(this);
+    //var elem = document.elementFromPoint(mouse[0], mouse[1]);
+    //var ele = document.querySelectorAll(':hover')
+    //console.log(mouse)
+})
+    div.call(d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended))
+
+    function dragstarted(d) {
+        //console.log(d3.select(this)._groups[0][0].lastChild.__proto__)
+        newdiv=d3.select(this).selectAll('#CIA_31text')
+        console.log(newdiv)
+        
+        //console.log((d3.select(this)._groups[0]))
+        //console.log(d3.selectAll("div"))
+        //d3.select(this).raise().classed("active", true);
+        //newdiv.raise().classed("active", true)
+    }
+
+    function dragged(d) {
+        //console.log((parseFloat(event.pageX)*0.1))
+        //newdiv=d3.select(d3.select(this)._groups[0][0].lastChild.__proto__.id)
+        d3.select(this).selectAll('#CIA_31text')
+            .style("left", (parseFloat(event.pageX)-0) + "px")
+            .style("top", (parseFloat(event.pageY)-0) + "px");
+    }
+
+    function dragended(d) {
+        console.log("ended")
+        newdiv=d3.select(this).selectAll('#CIA_31text')
+        //d3.select(this)
+    newdiv.classed("active", false);
+    }
+})
+
+</script>
+</body>
+
+
+</html>
