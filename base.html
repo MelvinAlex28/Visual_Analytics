@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visual Analytics</title>
+    <style> 
+      .dropbtn { 
+          background-color: #c3cec3; 
+          color: rgb(10, 1, 1); 
+          padding: 16px; 
+          font-size: 16px; 
+          border: none; 
+          cursor: pointer; 
+      } 
+
+      .dropdown { 
+          position: relative; 
+          display: inline-block; 
+      } 
+
+      .dropdown-content { 
+          display: none; 
+          position: absolute; 
+          background-color: #f9f9f9; 
+          min-width: 160px; 
+          box-shadow: 0px 8px 16px  
+              0px rgba(0, 0, 0, 0.2); 
+          z-index: 1; 
+      } 
+
+      .dropdown-content a { 
+          color: black; 
+          padding: 12px 16px; 
+          text-decoration: none; 
+          display: block; 
+      } 
+
+      .dropdown-content a:hover { 
+          background-color: #f1f1f1 
+      } 
+
+      .dropdown:hover .dropdown-content { 
+          display: block; 
+      } 
+
+      .dropdown:hover .dropbtn { 
+          background-color: #3e8e41; 
+      } 
+      #caption {
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-style: bold;
+            font-family: Apple Chancery;
+            color: rgb(150, 58, 25);
+            font-size: 20pt;
+}
+        .col-4{
+            border-style: outset;
+            border-width: 7px;
+            color: coral;
+            border-color: coral;  
+        }
+
+        .col-6 {
+            border-style: outset;
+            border-width: 7px;
+            color: coral;
+            border-color: coral;  
+        }
+        input{display: none;}
+  </style> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"/>
+
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="caption">
+        Visual Analytics Presentation
+    </div>
+<div class="container">
+  
+  
+  <div class="container">
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="cluster0" name="cloud" value='cluster0'
+               onchange="handleTradeAttr()" checked>
+        <label class="custom-control-label" for="cluster0">Cluster 0</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="cluster1" name="cloud" value='cluster1'
+               onchange="handleTradeAttr()">
+        <label class="custom-control-label" for="cluster1">Cluster 1</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" class="custom-control-input" id="cluster2" name="cloud" value='cluster2'
+             onchange="handleTradeAttr()">
+      <label class="custom-control-label" for="cluster2">Cluster 2</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" class="custom-control-input" id="cluster3" name="cloud" value='cluster3'
+           onchange="handleTradeAttr()">
+    <label class="custom-control-label" for="cluster3">Cluster 3</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" class="custom-control-input" id="cluster4" name="cloud" value='cluster4'
+         onchange="handleTradeAttr()">
+  <label class="custom-control-label" for="cluster4">Cluster 4</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" class="custom-control-input" id="cluster5" name="cloud" value='cluster5'
+           onchange="handleTradeAttr()">
+    <label class="custom-control-label" for="cluster5">Cluster 5</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" class="custom-control-input" id="cluster6" name="cloud" value='cluster6'
+           onchange="handleTradeAttr()">
+    <label class="custom-control-label" for="cluster6">Cluster 6</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" class="custom-control-input" id="cluster7" name="cloud" value='cluster7'
+           onchange="handleTradeAttr()">
+    <label class="custom-control-label" for="cluster7">Cluster 7</label>
+  </div>
+
+</div>
+<iframe id="documentcluster" src="documentcluster/cluster0.html" height="1000" width="1000" style="border:none;" ></iframe>
+<script>
+  function handleTradeAttr() {
+        const rbg = document.querySelectorAll('input[name="cloud"]')
+        for (const rb of rbg) {
+            if (rb.checked) {
+               let cluster = rb.value;
+               let source='';
+               if(cluster === 'cluster0'){
+                   source = "documentcluster/cluster0.html"
+               }
+               if(cluster === 'cluster1'){
+                    source = "documentcluster/cluster1.html"
+                }
+                if(cluster === 'cluster2'){
+                    source = "documentcluster/cluster2.html"
+                }
+                if(cluster === 'cluster3'){
+                    source = "documentcluster/cluster3.html"
+                }
+                if(cluster === 'cluster4'){
+                    source = "documentcluster/cluster4.html"
+                }
+                if(cluster === 'cluster5'){
+                    source = "documentcluster/cluster5.html"
+                }
+                if(cluster === 'cluster6'){
+                    source = "documentcluster/cluster6.html"
+                }
+                if(cluster === 'cluster7'){
+                    source = "documentcluster/cluster7.html"
+                }
+                document.getElementById("documentcluster").src = source;
+            }
+        }
+
+    }
+</script>
+
+   
+    
+      
+    
+
+</div>
+</body>
+</html>

@@ -21,7 +21,7 @@ d3.json("data.json").then(function (data){
         .on('click',function(d){
 
 
-                text = d3.select('#workspace').append('div').classed('doclist', true);
+                text = d3.select('#display').append('div').classed('doclist', true);
 
 
 
