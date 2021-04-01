@@ -107,8 +107,13 @@
   
   <div class="container">
     <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" class="custom-control-input" id="cluster0" name="cloud" value='cluster0'
+        <input type="radio" class="custom-control-input" id="file" name="cloud" value='file'
                onchange="handleTradeAttr()" checked>
+        <label class="custom-control-label" for="file">Files</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="cluster0" name="cloud" value='cluster0'
+               onchange="handleTradeAttr()">
         <label class="custom-control-label" for="cluster0">Cluster 0</label>
     </div>
     <div class="custom-control custom-radio custom-control-inline">
@@ -120,35 +125,41 @@
       <input type="radio" class="custom-control-input" id="cluster2" name="cloud" value='cluster2'
              onchange="handleTradeAttr()">
       <label class="custom-control-label" for="cluster2">Cluster 2</label>
-  </div>
-  <div class="custom-control custom-radio custom-control-inline">
-    <input type="radio" class="custom-control-input" id="cluster3" name="cloud" value='cluster3'
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="cluster3" name="cloud" value='cluster3'
            onchange="handleTradeAttr()">
-    <label class="custom-control-label" for="cluster3">Cluster 3</label>
-</div>
-<div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" class="custom-control-input" id="cluster4" name="cloud" value='cluster4'
+        <label class="custom-control-label" for="cluster3">Cluster 3</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="cluster4" name="cloud" value='cluster4'
          onchange="handleTradeAttr()">
-  <label class="custom-control-label" for="cluster4">Cluster 4</label>
-</div>
-<div class="custom-control custom-radio custom-control-inline">
-    <input type="radio" class="custom-control-input" id="cluster5" name="cloud" value='cluster5'
+        <label class="custom-control-label" for="cluster4">Cluster 4</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="cluster5" name="cloud" value='cluster5'
            onchange="handleTradeAttr()">
-    <label class="custom-control-label" for="cluster5">Cluster 5</label>
-  </div>
-  <div class="custom-control custom-radio custom-control-inline">
-    <input type="radio" class="custom-control-input" id="cluster6" name="cloud" value='cluster6'
+        <label class="custom-control-label" for="cluster5">Cluster 5</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="cluster6" name="cloud" value='cluster6'
            onchange="handleTradeAttr()">
-    <label class="custom-control-label" for="cluster6">Cluster 6</label>
-  </div>
-  <div class="custom-control custom-radio custom-control-inline">
-    <input type="radio" class="custom-control-input" id="cluster7" name="cloud" value='cluster7'
+        <label class="custom-control-label" for="cluster6">Cluster 6</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" class="custom-control-input" id="cluster7" name="cloud" value='cluster7'
            onchange="handleTradeAttr()">
-    <label class="custom-control-label" for="cluster7">Cluster 7</label>
-  </div>
+        <label class="custom-control-label" for="cluster7">Cluster 7</label>
+    </div>
 
 </div>
-<iframe id="documentcluster" src="documentcluster/cluster0.html" height="1000" width="1000" style="border:none;" ></iframe>
+<div>
+    <p></p>
+</div>
+<div>
+    <p></p>
+</div>
+<iframe id="documentcluster" src="documentcluster/file.html" height="1000" width="1000" style="border:none;" ></iframe>
 <script>
   function handleTradeAttr() {
         const rbg = document.querySelectorAll('input[name="cloud"]')
@@ -156,6 +167,9 @@
             if (rb.checked) {
                let cluster = rb.value;
                let source='';
+               if(cluster === 'file'){
+                   source = "documentcluster/file.html"
+               }
                if(cluster === 'cluster0'){
                    source = "documentcluster/cluster0.html"
                }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visual Analytics</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    
+    
+   
+    <script src='d3.js'></script>
+    
+
+    <style>
+        #caption {
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-style: bold;
+            font-family: Apple Chancery;
+            color: rgb(150, 58, 25);
+            font-size: 20pt;
+        }
+        p {
+        
+            font-style: italic;
+            color: rgb(150, 58, 25);
+            font-family: Apple Chancery;
+        
+        }
+                
+       .col-4 {
+  
+            border-style: outset;
+            border-width: 7px;
+            color: coral;
+            border-color: coral;  
+        }
+
+        .col-8 {
+  
+            border-style: outset;
+            border-width: 7px;
+            color: coral;
+            border-color: coral;  
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+   
+<div class="row">
+    <div class="col-4">
+        <h3>Document ID</h3>
+            <ul id="sortable" >
+
+           </ul>
+
+
+    </div>
+    <div class="col-8" id="workspace">
+        <h3>Workspace</h3>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<script>
+    d3.json("data.json").then(function (data){
+    var ul = d3.select('ul').classed('sortable',true).append('li').classed('list',true);
+
+    ul.selectAll('li')
+        .data(Object.keys(data))
+        .enter()
+        .append('li')
+        
+        .append('p')
+        .attr('id',function(d){
+            return d;
+        })
+
+        .html(function (d){
+            return d;
+        })
+   
+
+
+        .on('click',function(d){
+
+
+                text = d3.select('#workspace').append('div').classed('doclist', true);
+
+                text.append('div').classed('text', true).append('p').html(function () {
+                    return [d , data[d]];
+                })
+
+
+    });
+
+
+
+})
+
+
+</script>
+</body>
+
+
+</html>

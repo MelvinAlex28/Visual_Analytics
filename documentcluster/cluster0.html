@@ -112,19 +112,44 @@ p {
                     return [d , data[d]];
                 })
 
-
-
-
-
-
-
-
-
-
-
     });
+    div = d3.select('#display')
+    div.on("mousemove", function() {
+    var mouse = d3.mouse(this);
+    //var elem = document.elementFromPoint(mouse[0], mouse[1]);
+    //var ele = document.querySelectorAll(':hover')
+    //console.log(mouse)
+})
+    div.call(d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended))
 
+    function dragstarted(d) {
+        //console.log(d3.select(this)._groups[0][0].lastChild.__proto__)
+        newdiv=d3.select(this).selectAll('#CIA_31text')
+        console.log(newdiv)
+        
+        //console.log((d3.select(this)._groups[0]))
+        //console.log(d3.selectAll("div"))
+        //d3.select(this).raise().classed("active", true);
+        //newdiv.raise().classed("active", true)
+    }
 
+    function dragged(d) {
+        //console.log((parseFloat(event.pageX)*0.1))
+        //newdiv=d3.select(d3.select(this)._groups[0][0].lastChild.__proto__.id)
+        d3.select(this).selectAll('#CIA_31text')
+            .style("left", (parseFloat(event.pageX)-0) + "px")
+            .style("top", (parseFloat(event.pageY)-0) + "px");
+    }
+
+    function dragended(d) {
+        console.log("ended")
+        newdiv=d3.select(this).selectAll('#CIA_31text')
+        //d3.select(this)
+    newdiv.classed("active", false);
+    }
 
 })
 

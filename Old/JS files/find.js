@@ -31,7 +31,7 @@ d3.json("/dataset/data.json").then(function (data){
     })
 
         
-})/*
+})
 function fileFun(data) {
 // create the drop down menu of filename
     var selector = d3.select("body")
@@ -108,4 +108,3 @@ function fileFun(data) {
         d3.select("div").classed("active", false);
     }
 }
-*/
