@@ -12,41 +12,41 @@
 
     <style>
         #caption {
-  margin: auto;
-  padding-top: 1%;
-  padding-bottom: 1%;
-  padding-left: 4%;
-  font-style: bold;
-  font-family: Apple Chancery;
-  color: rgb(150, 58, 25);
-  font-size: 20pt;
-}
-p {
-  
-  font-style: italic;
-  color: rgb(150, 58, 25);
-  font-family: Apple Chancery;
-  
-}
+            margin: auto;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            padding-left: 4%;
+            font-style: bold;
+            font-family: Apple Chancery;
+            color: rgb(150, 58, 25);
+            font-size: 20pt;
+            }
+        p {
+        
+        font-style: italic;
+        color: rgb(150, 58, 25);
+        font-family: Apple Chancery;
+        
+        }
         
        
         
        
-        .col-4 {
+        .col-3 {
   
-  border-style: outset;
-  border-width: 7px;
-  color: coral;
-  border-color: coral;  
- }
+            border-style: outset;
+            border-width: 7px;
+            color: coral;
+            border-color: coral;  
+            }
 
-.col-8 {
-  
-  border-style: outset;
-  border-width: 7px;
-  color: coral;
-  border-color: coral;  
- }
+        .col-8 {
+        
+        border-style: outset;
+        border-width: 7px;
+        color: coral;
+        border-color: coral;  
+        }
 
 
 
@@ -60,7 +60,7 @@ p {
 <body>
    
 <div class="row">
-    <div class="col-4">
+    <div class="col-3">
 
 
 
@@ -109,7 +109,7 @@ p {
 
 
                 text.append('div').classed('text', true).append('p').html(function () {
-                    return [d , data[d]];
+                    return [d +":"+ data[d]];
                 })
 
     });

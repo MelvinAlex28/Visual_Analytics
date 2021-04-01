@@ -29,7 +29,7 @@
         
         }
                 
-       .col-4 {
+       .col-3 {
   
             border-style: outset;
             border-width: 7px;
@@ -53,7 +53,7 @@
 <body>
    
 <div class="row">
-    <div class="col-4">
+    <div class="col-3">
         <h3>Document ID</h3>
             <ul id="sortable" >
 
@@ -97,7 +97,7 @@
                 text = d3.select('#workspace').append('div').classed('doclist', true);
 
                 text.append('div').classed('text', true).append('p').html(function () {
-                    return [d , data[d]];
+                    return [d +":"+ data[d]];
                 })
 
 
