@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!-- <script src="https://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+    <script src="https://d3js.org/d3.v2.js"></script>
+    
+    <script src="code.js"></script>
+    
+    
+    
+
+  <style>
+    
+    .axis,
+    .frame {
+    shape-rendering: crispEdges;
+    }
+    
+    
+    .axis line {
+    stroke: #00F;
+    stroke-width: 2px;
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+    }
+    
+    .axis path {
+    stroke: #00F;
+    stroke-width: 2px;
+    stroke: black;
+    fill: none;
+    }
+    
+    .axis text {
+    font-family: sans-serif;
+    font-size: 10px;
+    }
+    
+    
+
+    .ghost {
+    
+    fill-opacity: 0;
+    }
+
+    .label {
+    font-size: 12px;
+    color: blue;
+    }
+
+    .datapoint {
+    r: 8;
+    
+    fill-opacity: .5;
+    }
+    
+   
+    #caption {
+  margin: auto;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 4%;
+  font-style: bold;
+  font-family: Apple Chancery;
+  color: rgb(150, 58, 25);
+  font-size: 20pt;
+}
+p {
+  
+  font-style: italic;
+  color: rgb(150, 58, 25);
+  font-family: Apple Chancery;
+  
+}
+        
+p {
+        
+        font-style: italic;
+        color: rgb(150, 58, 25);
+        font-family: Apple Chancery;
+    
+    }       
+        
+       
+        .col-6 {
+  
+  border-style: outset;
+  border-width: 7px;
+  color: coral;
+  border-color: coral;  
+ }
+
+.col-2 {
+  
+  border-style: outset;
+  border-width: 7px;
+  color: coral;
+  border-color: coral;  
+ }
+ .col-4 {
+  
+  border-style: outset;
+  border-width: 7px;
+  color: coral;
+  border-color: coral;  
+ }
+
+
+  </style>
+
+</head>
+
+
+<body>
+    
+    <div id="caption">
+      Visual Analytics Presentation
+  </div>
+  <div class="row">
+    <div class="col-6">
+
+
+
+            <h3>MDS</h3>
+            <h4>The Distance between the nodes represent the Similarity Between the Files</h4>
+            <div id="d3plot" class="d3-scatter-output">  </div>
+
+                </ul>
+
+
+    </div>
+    <div class="col-2">
+      <h3>Document ID</h3>
+      <ul id="sortable" >
+
+     </ul>
+
+    </div>
+    <div class="col-4" id="workspace">
+      <h3>Workspace</h3>
+
+  </div>
+
+</div>
+  <!-- <div id="d3plot" class="d3-scatter-output">  </div> 
+  <div id ="files"></div> -->
+
+  
+</body>
+</html>
